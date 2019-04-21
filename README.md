@@ -19,11 +19,15 @@ TextCNN by TensorFlow 2.0.0 ( tf.keras mainly ).
 ### Train result
 Use 22386 samples after 25 epochs:
 
-| Loss | Accuracy | Val loss | Val accuracy |
-| --- | --- | --- | --- |
-| 0.1345 | 0.9752 | 0.3105 | 0.9286 |
+| Loss | Accuracy | Precision | Recall | Val loss | Val accuracy | Val precision | Val recall |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| 0.1317 | 0.9771 | 0.9809 | 0.9711 | 0.3002 | 0.9241 | 0.9367 | 0.9241 |
 ### Test result
-Use 226 samples, test accuracy is **0.9292**.
+Use 226 samples:
+
+| Accuracy | Precision | Recall | F1-Measure |
+| --- | --- | --- | --- |
+| 0.9292 | 0.9409 | 0.9159 | 0.9283 |
 ### Usage
 ```
 usage: text_cnn.py [-h] [-t TEST_SAMPLE_PERCENTAGE] [-e EMBED_SIZE]
@@ -58,7 +62,7 @@ optional arguments:
                         The fraction of validation.(default=0.01)
   --log_dir LOG_DIR     Log dir for tensorboard.(default=./log/)
 ```
-##### You need know...
+##### You need to know...
 1. You need to alter `load_data_and_write_to_file` function to match you data file;
 2. This code used single channel input, you can use two channels from embedding vector, one is static and the other is dynamic. Maybe it is greater;
 3. The model is saved by `hdf5` file;

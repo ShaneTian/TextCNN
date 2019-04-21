@@ -139,7 +139,8 @@ def train(x_train, y_train, vocab_size, feature_size, save_path):
     model = TextCNN(vocab_size, feature_size)
     model.summary()
     parallel_model = keras.utils.multi_gpu_model(model, gpus=2)
-    parallel_model.compile(tf.optimizers.Adam(), loss='categorical_crossentropy', metrics=['accuracy'])
+    parallel_model.compile(tf.optimizers.Adam(), loss='categorical_crossentropy',
+                           metrics=['accuracy', keras.metrics.Precision(), keras.metrics.Recall()])
     # keras.utils.plot_model(model, show_shapes=True, to_file="../model.png")
     y_train = tf.one_hot(y_train, args.num_classes)
     tb_callback = keras.callbacks.TensorBoard(args.log_dir, histogram_freq=0.1, write_graph=True,
@@ -155,9 +156,16 @@ def test(model, x_test, y_test):
     print("\nTesting...")
     y_pred = model.predict(x=x_test, batch_size=1, verbose=1)
     y_test = tf.one_hot(y_test, args.num_classes)
-    m = keras.metrics.CategoricalAccuracy()
-    m.update_state(y_test, y_pred)
-    print("Test accuracy: {:f}".format(m.result()))
+    m1 = keras.metrics.CategoricalAccuracy()
+    m2 = keras.metrics.Precision()
+    m3 = keras.metrics.Recall()
+    m1.update_state(y_test, y_pred)
+    m2.update_state(y_test, y_pred)
+    m3.update_state(y_test, y_pred)
+    print("Test accuracy: {:f}".format(m1.result()))
+    print("Test precision: {:f}".format(m2.result()))
+    print("Test recall: {:f}".format(m3.result()))
+    print("Test F1-Measure: {:f}".format(2 * m2.result() * m3.result() / (m2.result() + m3.result())))
 
 
 if __name__ == '__main__':
