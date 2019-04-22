@@ -29,7 +29,7 @@ Use 226 samples:
 | Accuracy | Precision | Recall | F1-Measure |
 | --- | --- | --- | --- |
 | 0.9381 | 0.9591 | 0.9336 | **0.9462** |
-### images
+### Images
 **Loss**
 
 ![Loss](https://ws4.sinaimg.cn/large/006tNc79gy1g2buxirtkej30f709zdge.jpg)
