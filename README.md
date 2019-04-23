@@ -29,22 +29,8 @@ Use 226 samples:
 | Accuracy | Precision | Recall | F1-Measure |
 | --- | --- | --- | --- |
 | 0.9381 | 0.9591 | 0.9336 | **0.9462** |
-### images
-**Loss**
-
-![Loss](https://ws4.sinaimg.cn/large/006tNc79gy1g2buxirtkej30f709zdge.jpg)
-
-**Accuracy**
-
-![Accuracy](https://ws3.sinaimg.cn/large/006tNc79gy1g2buxixtiaj30ff09zaaw.jpg)
-
-**Precision**
-
-![Precision](https://ws2.sinaimg.cn/large/006tNc79gy1g2buxilmstj30fh09wjs5.jpg)
-
-**Recall**
-
-![Recall](https://ws4.sinaimg.cn/large/006tNc79gy1g2buxj23njj30fh0a0q3m.jpg)
+### Images
+![](https://ws3.sinaimg.cn/large/006tNc79gy1g2cmax930hj30e70av0ti.jpg)
 
 **Confusion matrix**
 
