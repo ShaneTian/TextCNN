@@ -29,7 +29,7 @@ Use 226 samples:
 | Accuracy | Precision | Recall | F1-Measure |
 | --- | --- | --- | --- |
 | 0.9381 | 0.9591 | 0.9336 | **0.9462** |
-### Images
+### images
 **Loss**
 
 ![Loss](https://ws4.sinaimg.cn/large/006tNc79gy1g2buxirtkej30f709zdge.jpg)
@@ -45,6 +45,10 @@ Use 226 samples:
 **Recall**
 
 ![Recall](https://ws4.sinaimg.cn/large/006tNc79gy1g2buxj23njj30fh0a0q3m.jpg)
+
+**Confusion matrix**
+
+![](https://ws4.sinaimg.cn/large/006tNc79gy1g2ceigu9jej309207zq41.jpg)
 ### Usage
 ```
 usage: train.py [-h] [-t TEST_SAMPLE_PERCENTAGE] [-p PADDING_SIZE]
