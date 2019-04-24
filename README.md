@@ -7,34 +7,42 @@ TextCNN by TensorFlow 2.0.0 ( tf.keras mainly ).
 4. numpy 1.16.2
 
 ## Data
-- Vocabulary size: 3447
+- Vocabulary size: 3407
 - Number of classes: 18
-- Train/Test split: 22386/226
-- Shape of train data: (22386, 128)
-- Shape of test data: (226, 128)
+- Train/Test split: 20351/2261
 
 ## Model architecture
-![Model architecture](https://ws1.sinaimg.cn/large/006tNc79gy1g2bu549arhj316i0u0wmt.jpg)
+![](https://ws1.sinaimg.cn/large/006tNc79gy1g2e66v8qatj311q0okao2.jpg)
+
+## Model parameters
+- Padding size: 128
+- Embedding size: 512
+- Num channel: 1
+- Filter size: [3, 4, 5]
+- Num filters: 128
+- Dropout rate: 0.5
+- Regularizers lambda: 0.01
+- Batch size: 64
+- Epochs: 10
+- Fraction validation: 0.05 (1018 samples)
+- Total parameters: 2,538,130
 
 ## Run
 ### Train result
-Use 22386 samples after 25 epochs:
+Use 20351 samples after 10 epochs:
 
 | Loss | Accuracy | Precision | Recall | Val loss | Val accuracy | Val precision | Val recall |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| 0.1229 | 0.9790 | 0.9825 | 0.9743 | 0.2873 | 0.9286 | 0.9367 | 0.9241 |
+| 0.1078 | 0.9815 | 0.9844 | 0.9776 | 0.4020 | 0.9194 | 0.9292 | 0.9155 |
 ### Test result
-Use 226 samples:
+Use 2261 samples:
 
 | Accuracy | Precision | Recall | F1-Measure |
 | --- | --- | --- | --- |
-| 0.9381 | 0.9591 | 0.9336 | **0.9462** |
+| 0.9371 | 0.9459 | 0.9279 | **0.9368** |
 ### Images
-![](https://ws3.sinaimg.cn/large/006tNc79gy1g2cmax930hj30e70av0ti.jpg)
+![](https://ws2.sinaimg.cn/large/006tNc79gy1g2e65013p0j30ew0k2dhp.jpg)
 
-**Confusion matrix**
-
-![](https://ws4.sinaimg.cn/large/006tNc79gy1g2ceigu9jej309207zq41.jpg)
 ### Usage
 ```
 usage: train.py [-h] [-t TEST_SAMPLE_PERCENTAGE] [-p PADDING_SIZE]
@@ -42,7 +50,7 @@ usage: train.py [-h] [-t TEST_SAMPLE_PERCENTAGE] [-p PADDING_SIZE]
                 [-d DROPOUT_RATE] [-c NUM_CLASSES] [-l REGULARIZERS_LAMBDA]
                 [-b BATCH_SIZE] [--epochs EPOCHS]
                 [--fraction_validation FRACTION_VALIDATION]
-                [--log_dir LOG_DIR]
+                [--results_dir RESULTS_DIR]
 
 This is the TextCNN train project.
 
@@ -55,7 +63,7 @@ optional arguments:
   -e EMBED_SIZE, --embed_size EMBED_SIZE
                         Word embedding size.(default=128)
   -f FILTER_SIZES, --filter_sizes FILTER_SIZES
-                        Convolution kernel sizes.(default=[3, 4, 5])
+                        Convolution kernel sizes.(default=3,4,5)
   -n NUM_FILTERS, --num_filters NUM_FILTERS
                         Number of each convolution kernel.(default=128)
   -d DROPOUT_RATE, --dropout_rate DROPOUT_RATE
@@ -69,13 +77,19 @@ optional arguments:
   --epochs EPOCHS       Number of epochs.(default=200)
   --fraction_validation FRACTION_VALIDATION
                         The fraction of validation.(default=0.01)
-  --log_dir LOG_DIR     Log dir for tensorboard.(default=./log/)
+  --results_dir RESULTS_DIR
+                        The results dir including log, model, vocabulary and
+                        some inages.(default=./results/)
 ```
 
 ```
-usage: test.py [-h] [-p PADDING_SIZE] [-c NUM_CLASSES]
+usage: test.py [-h] [-p PADDING_SIZE] [-c NUM_CLASSES] results_dir
 
 This is the TextCNN test project.
+
+positional arguments:
+  results_dir           The results dir including log, model, vocabulary and
+                        some inages.
 
 optional arguments:
   -h, --help            show this help message and exit

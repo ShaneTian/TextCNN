@@ -7,6 +7,7 @@ import numpy as np
 from sklearn.metrics import confusion_matrix
 from sklearn.utils.multiclass import unique_labels
 import matplotlib.pyplot as plt
+import os
 
 
 def plot_confusion_matrix(y_true, y_pred, classes,
@@ -70,7 +71,7 @@ def test(model, x_test, y_test):
     y_test_ont_hot = tf.one_hot(y_test, args.num_classes)
 
     plot_confusion_matrix(y_test, y_pred, np.arange(args.num_classes))
-    plt.savefig("./results/confusion_matrix.pdf")
+    plt.savefig(os.path.join(args.results_dir, "confusion_matrix.pdf"))
 
     m1 = metrics.CategoricalAccuracy()
     m2 = metrics.Precision()
@@ -86,11 +87,13 @@ def test(model, x_test, y_test):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='This is the TextCNN test project.')
+    parser.add_argument('results_dir', type=str, help='The results dir including log, model, vocabulary and some inages.')
     parser.add_argument('-p', '--padding_size', default=128, type=int, help='Padding size of sentences.(default=128)')
     parser.add_argument('-c', '--num_classes', default=18, type=int, help='Number of target classes.(default=18)')
     args = parser.parse_args()
 
-    x_test, y_test = preprocess("./data/test_data.csv", "./results/vocab.json", args.padding_size, test=True)
+    x_test, y_test = preprocess("./data/test_data.csv", os.path.join(args.results_dir, "vocab.json"),
+                                args.padding_size, test=True)
     print("Loading model...")
-    model = load_model("./results/TextCNN.h5")
+    model = load_model(os.path.join(args.results_dir, 'TextCNN.h5'))
     test(model, x_test, y_test)

@@ -11,7 +11,7 @@ def TextCNN(vocab_size, feature_size, embed_size, num_classes, num_filters,
     embed = keras.layers.Reshape((feature_size, embed_size, 1))(embed)
 
     pool_outputs = []
-    for filter_size in filter_sizes:
+    for filter_size in list(map(int, filter_sizes.split(','))):
         filter_shape = (filter_size, embed_size)
         conv = keras.layers.Conv2D(num_filters, filter_shape, strides=(1, 1), padding='valid',
                                    data_format='channels_last', activation='relu',
