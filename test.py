@@ -87,7 +87,7 @@ def test(model, x_test, y_test):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='This is the TextCNN test project.')
-    parser.add_argument('results_dir', type=str, help='The results dir including log, model, vocabulary and some inages.')
+    parser.add_argument('results_dir', type=str, help='The results dir including log, model, vocabulary and some images.')
     parser.add_argument('-p', '--padding_size', default=128, type=int, help='Padding size of sentences.(default=128)')
     parser.add_argument('-c', '--num_classes', default=18, type=int, help='Number of target classes.(default=18)')
     args = parser.parse_args()

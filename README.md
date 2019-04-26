@@ -57,11 +57,11 @@ This is the TextCNN train project.
 optional arguments:
   -h, --help            show this help message and exit
   -t TEST_SAMPLE_PERCENTAGE, --test_sample_percentage TEST_SAMPLE_PERCENTAGE
-                        The fraction of test data.(default=0.01)
+                        The fraction of test data.(default=0.1)
   -p PADDING_SIZE, --padding_size PADDING_SIZE
                         Padding size of sentences.(default=128)
   -e EMBED_SIZE, --embed_size EMBED_SIZE
-                        Word embedding size.(default=128)
+                        Word embedding size.(default=512)
   -f FILTER_SIZES, --filter_sizes FILTER_SIZES
                         Convolution kernel sizes.(default=3,4,5)
   -n NUM_FILTERS, --num_filters NUM_FILTERS
@@ -71,15 +71,15 @@ optional arguments:
   -c NUM_CLASSES, --num_classes NUM_CLASSES
                         Number of target classes.(default=18)
   -l REGULARIZERS_LAMBDA, --regularizers_lambda REGULARIZERS_LAMBDA
-                        L2 regulation parameter.(default=0)
+                        L2 regulation parameter.(default=0.01)
   -b BATCH_SIZE, --batch_size BATCH_SIZE
                         Mini-Batch size.(default=64)
-  --epochs EPOCHS       Number of epochs.(default=200)
+  --epochs EPOCHS       Number of epochs.(default=10)
   --fraction_validation FRACTION_VALIDATION
-                        The fraction of validation.(default=0.01)
+                        The fraction of validation.(default=0.05)
   --results_dir RESULTS_DIR
                         The results dir including log, model, vocabulary and
-                        some inages.(default=./results/)
+                        some images.(default=./results/)
 ```
 
 ```
@@ -89,7 +89,7 @@ This is the TextCNN test project.
 
 positional arguments:
   results_dir           The results dir including log, model, vocabulary and
-                        some inages.
+                        some images.
 
 optional arguments:
   -h, --help            show this help message and exit
