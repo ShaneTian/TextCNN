@@ -79,11 +79,11 @@ Use 2261 samples:
 | 0.9363 | 0.9428 | 0.9310 | **0.9360** |
 ### Images
 #### Accuracy
-![Accuracy](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/acc.pdf)
+![Accuracy](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/acc.jpg)
 #### Loss
-![Loss](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/loss.pdf)
+![Loss](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/loss.jpg)
 #### Confusion matrix
-![Confusion matrix](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/confusion_matrix.pdf)
+![Confusion matrix](https://github.com/ShaneTian/TextCNN/blob/master/results/2019-04-29-15-43-54/confusion_matrix.jpg)
 
 ### Usage
 ```
