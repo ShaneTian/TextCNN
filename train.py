@@ -15,7 +15,7 @@ def train(x_train, y_train, vocab_size, feature_size, save_path):
     model.summary()
     parallel_model = keras.utils.multi_gpu_model(model, gpus=2)
     parallel_model.compile(tf.optimizers.Adam(), loss='categorical_crossentropy',
-                           metrics=['accuracy', keras.metrics.Precision(), keras.metrics.Recall()])
+                           metrics=['accuracy'])
     keras.utils.plot_model(model, show_shapes=True, to_file=os.path.join(args.results_dir, timestamp, "model.pdf"))
     y_train = tf.one_hot(y_train, args.num_classes)
     tb_callback = keras.callbacks.TensorBoard(os.path.join(args.results_dir, timestamp, 'log/'),
@@ -44,10 +44,11 @@ if __name__ == '__main__':
     parser.add_argument('--fraction_validation', default=0.05, type=float, help='The fraction of validation.(default=0.05)')
     parser.add_argument('--results_dir', default='./results/', type=str, help='The results dir including log, model, vocabulary and some images.(default=./results/)')
     args = parser.parse_args()
+    print('Parameters:', args, '\n')
 
     if not os.path.exists(args.results_dir):
         os.mkdir(args.results_dir)
-    timestamp = str(int(time.time()))
+    timestamp = time.strftime("%Y-%m-%d-%H-%M", time.localtime(time.time()))
     os.mkdir(os.path.join(args.results_dir, timestamp))
     os.mkdir(os.path.join(args.results_dir, timestamp, 'log/'))
 

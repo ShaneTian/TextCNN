@@ -12,7 +12,44 @@ TextCNN by TensorFlow 2.0.0 ( tf.keras mainly ).
 - Train/Test split: 20351/2261
 
 ## Model architecture
-![](https://ws1.sinaimg.cn/large/006tNc79gy1g2e66v8qatj311q0okao2.jpg)
+```
+Model: "model"
+__________________________________________________________________________________________________
+Layer (type)                    Output Shape         Param #     Connected to                     
+==================================================================================================
+input_data (InputLayer)         [(None, 128)]        0                                            
+__________________________________________________________________________________________________
+embedding (Embedding)           (None, 128, 512)     1744384     input_data[0][0]                 
+__________________________________________________________________________________________________
+add_channel (Reshape)           (None, 128, 512, 1)  0           embedding[0][0]                  
+__________________________________________________________________________________________________
+convolution_3 (Conv2D)          (None, 126, 1, 128)  196736      add_channel[0][0]                
+__________________________________________________________________________________________________
+convolution_4 (Conv2D)          (None, 125, 1, 128)  262272      add_channel[0][0]                
+__________________________________________________________________________________________________
+convolution_5 (Conv2D)          (None, 124, 1, 128)  327808      add_channel[0][0]                
+__________________________________________________________________________________________________
+max_pooling_3 (MaxPooling2D)    (None, 1, 1, 128)    0           convolution_3[0][0]              
+__________________________________________________________________________________________________
+max_pooling_4 (MaxPooling2D)    (None, 1, 1, 128)    0           convolution_4[0][0]              
+__________________________________________________________________________________________________
+max_pooling_5 (MaxPooling2D)    (None, 1, 1, 128)    0           convolution_5[0][0]              
+__________________________________________________________________________________________________
+concatenate (Concatenate)       (None, 1, 1, 384)    0           max_pooling_3[0][0]              
+                                                                 max_pooling_4[0][0]              
+                                                                 max_pooling_5[0][0]              
+__________________________________________________________________________________________________
+flatten (Flatten)               (None, 384)          0           concatenate[0][0]                
+__________________________________________________________________________________________________
+dropout (Dropout)               (None, 384)          0           flatten[0][0]                    
+__________________________________________________________________________________________________
+dense (Dense)                   (None, 18)           6930        dropout[0][0]                    
+==================================================================================================
+Total params: 2,538,130
+Trainable params: 2,538,130
+Non-trainable params: 0
+__________________________________________________________________________________________________
+```
 
 ## Model parameters
 - Padding size: 128
@@ -31,17 +68,22 @@ TextCNN by TensorFlow 2.0.0 ( tf.keras mainly ).
 ### Train result
 Use 20351 samples after 10 epochs:
 
-| Loss | Accuracy | Precision | Recall | Val loss | Val accuracy | Val precision | Val recall |
-| --- | --- | --- | --- | --- | --- | --- | --- |
-| 0.1078 | 0.9815 | 0.9844 | 0.9776 | 0.4020 | 0.9194 | 0.9292 | 0.9155 |
+| Loss | Accuracy | Val loss | Val accuracy |
+| --- | --- | --- | --- |
+| 0.1609 | 0.9683 | 0.3648 | 0.9185 |
 ### Test result
 Use 2261 samples:
 
-| Accuracy | Precision | Recall | F1-Measure |
+| Accuracy | Macro-Precision | Macro-Recall | Macro-F1 |
 | --- | --- | --- | --- |
-| 0.9371 | 0.9459 | 0.9279 | **0.9368** |
+| 0.9363 | 0.9428 | 0.9310 | **0.9360** |
 ### Images
-![](https://ws2.sinaimg.cn/large/006tNc79gy1g2e65013p0j30ew0k2dhp.jpg)
+#### Accuracy
+![Accuracy](https://github.com/ShaneTian/TextCNN/raw/master/acc.pdf)
+#### Loss
+![Loss](https://github.com/ShaneTian/TextCNN/raw/master/loss.pdf)
+#### Confusion matrix
+![Confusion matrix](https://github.com/ShaneTian/TextCNN/raw/master/confusion_matrix.pdf)
 
 ### Usage
 ```

@@ -1,10 +1,9 @@
 import argparse
 from data_helper import preprocess
 from tensorflow.keras.models import load_model
-from tensorflow.keras import metrics
 import tensorflow as tf
 import numpy as np
-from sklearn.metrics import confusion_matrix
+from sklearn.metrics import confusion_matrix, accuracy_score, classification_report
 from sklearn.utils.multiclass import unique_labels
 import matplotlib.pyplot as plt
 import os
@@ -68,21 +67,14 @@ def test(model, x_test, y_test):
     print("Test...")
     y_pred_one_hot = model.predict(x=x_test, batch_size=1, verbose=1)
     y_pred = tf.math.argmax(y_pred_one_hot, axis=1)
-    y_test_ont_hot = tf.one_hot(y_test, args.num_classes)
 
     plot_confusion_matrix(y_test, y_pred, np.arange(args.num_classes))
     plt.savefig(os.path.join(args.results_dir, "confusion_matrix.pdf"))
 
-    m1 = metrics.CategoricalAccuracy()
-    m2 = metrics.Precision()
-    m3 = metrics.Recall()
-    m1.update_state(y_test_ont_hot, y_pred_one_hot)
-    m2.update_state(y_test_ont_hot, y_pred_one_hot)
-    m3.update_state(y_test_ont_hot, y_pred_one_hot)
-    print("Test accuracy: {:f}".format(m1.result()))
-    print("Test precision: {:f}".format(m2.result()))
-    print("Test recall: {:f}".format(m3.result()))
-    print("Test F1-Measure: {:f}".format(2 * m2.result() * m3.result() / (m2.result() + m3.result())))
+    print('\nTest accuracy: {}\n'.format(accuracy_score(y_test, y_pred)))
+    print('Classification report:')
+    target_names = ['class {:d}'.format(i) for i in np.arange(args.num_classes)]
+    print(classification_report(y_test, y_pred, target_names=target_names, digits=4))
 
 
 if __name__ == '__main__':
@@ -91,6 +83,7 @@ if __name__ == '__main__':
     parser.add_argument('-p', '--padding_size', default=128, type=int, help='Padding size of sentences.(default=128)')
     parser.add_argument('-c', '--num_classes', default=18, type=int, help='Number of target classes.(default=18)')
     args = parser.parse_args()
+    print('Parameters:', args)
 
     x_test, y_test = preprocess("./data/test_data.csv", os.path.join(args.results_dir, "vocab.json"),
                                 args.padding_size, test=True)
